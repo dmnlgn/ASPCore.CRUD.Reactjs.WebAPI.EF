@@ -140,33 +140,14 @@ namespace WebReservationService.Controllers
 
             return Ok(reservation);
         }
-
-        ////create reservation and guest
-        //[ActionName("CreateReservation")]
-        //[HttpPost]
-        //[Route("api/Reservations/CreateReservation/")]
-        //public IHttpActionResult CreateReservation([FromBody] Reservation reservation)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    db.Reservation.Add(reservation);
-        //    db.SaveChanges();
-
-        //    return CreatedAtRoute("DefaultApi", new { id = reservation.ReservationId }, reservation);
-        //}
-
-        [Route("CreateReservation")]
+        //create a new reservation
+        [Route("api/Reservations/CreateReservation")]
         [HttpPost]
         public object CreateReservation(Reservation reservation)
         {
             try
             {
                 Reservation sm = new Reservation();
-                sm.ReservationId = reservation.ReservationId;
-                sm.Kod_Rezerwacji = reservation.Kod_Rezerwacji;
 
                 db.Reservation.Add(sm);
                 db.SaveChanges();

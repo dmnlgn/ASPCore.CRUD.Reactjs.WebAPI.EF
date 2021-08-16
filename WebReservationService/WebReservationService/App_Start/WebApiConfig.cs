@@ -36,7 +36,18 @@ namespace WebReservationService
                routeTemplate: "api/{controller}/{action}/{CreateReservation}"
            );
 
-            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new System.Net.Http.Headers.MediaTypeHeaderValue("text/html"));
+            config.Routes.MapHttpRoute(
+               name: "CreateGuest",
+               routeTemplate: "api/{controller}/{action}/{CreateGuest}"
+           );
+
+            config.Formatters.JsonFormatter
+                .SupportedMediaTypes
+                .Add(new System.Net.Http.Headers.MediaTypeHeaderValue("text/html"));
+
+            config.Formatters.JsonFormatter
+                .SerializerSettings
+                .ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 
             config.EnableCors(new EnableCorsAttribute("*", "*", "GET,PUT,POST,DELETE"));
         }

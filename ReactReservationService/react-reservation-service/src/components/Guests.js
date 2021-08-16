@@ -11,7 +11,15 @@ export class Guests extends Component {
     }
 
     refreshList() {
-        fetch(process.env.REACT_APP_API + 'Guests')
+        fetch(process.env.REACT_APP_API + 'Guests',{
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'Accept': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+            },
+        })
         .then(response => response.json())
         .then(data => {
             this.setState({deps: data})
@@ -34,6 +42,7 @@ export class Guests extends Component {
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>NR REZEREACJI</th>
                         <th>IMIE</th>
                         <th>NAZWISKO</th>
                         <th>EMAIL</th>
@@ -48,6 +57,7 @@ export class Guests extends Component {
                     {deps.map((item) =>
                         <tr key={item.GuestId}>
                             <td>{item.GuestId}</td>
+                            <td>{item.Reservation_ReservationId}</td>
                             <td>{item.Imie}</td>
                             <td>{item.Nazwisko}</td>
                             <td>{item.Email}</td>

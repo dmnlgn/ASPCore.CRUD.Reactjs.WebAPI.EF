@@ -149,5 +149,24 @@ namespace WebReservationService.Controllers
 
             return Ok(guest);
         }
+        [ActionName("CreateGuest")]
+        [Route("api/Guests/CreateGuest")]
+        [HttpPost]
+        public object CreateReservation(Guest guest)
+        {
+            try
+            {
+                Guest sm = new Guest();
+
+                db.Guest.Add(sm);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+            }
+            return Ok(guest);
+
+        }
     }
 }
