@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DbReservationsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Guest">
+          <Key>
+            <PropertyRef Name="GuestId" />
+          </Key>
+          <Property Name="GuestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Imie" Type="nvarchar(max)" />
+          <Property Name="Nazwisko" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="Data urodzenia" Type="date" Nullable="false" />
+          <Property Name="Adres pocztowy" Type="nvarchar(max)" />
+          <Property Name="Reservation_ReservationId" Type="int" />
+          <Property Name="Telefon" Type="nvarchar(max)" />
+          <Property Name="Adres" Type="nvarchar(max)" />
+          <Property Name="Miasto" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="ReservationId" />
+          </Key>
+          <Property Name="ReservationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kod Rezerwacji" Type="nvarchar" MaxLength="10" />
+          <Property Name="Data utworzenia" Type="date" Nullable="false" />
+          <Property Name="Cena" Type="int" Nullable="false" />
+          <Property Name="Data zameldowania" Type="date" Nullable="false" />
+          <Property Name="Data wymeldowania" Type="date" Nullable="false" />
+          <Property Name="Waluta" Type="nvarchar(max)" />
+          <Property Name="Prowizja" Type="float" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_Guest_dbo_Reservation_Reservation_ReservationId">
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="0..1" />
+          <End Role="Guest" Type="Self.Guest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="ReservationId" />
+            </Principal>
+            <Dependent Role="Guest">
+              <PropertyRef Name="Reservation_ReservationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbReservationsModelStoreContainer">
+          <EntitySet Name="Guest" EntityType="Self.Guest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Guest_dbo_Reservation_Reservation_ReservationId" Association="Self.FK_dbo_Guest_dbo_Reservation_Reservation_ReservationId">
+            <End Role="Reservation" EntitySet="Reservation" />
+            <End Role="Guest" EntitySet="Guest" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DbReservationsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Guest">
+          <Key>
+            <PropertyRef Name="GuestId" />
+          </Key>
+          <Property Name="GuestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Imie" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Nazwisko" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Data_urodzenia" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Adres_pocztowy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Reservation_ReservationId" Type="Int32" />
+          <Property Name="Telefon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Adres" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Miasto" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Reservation" Relationship="Self.FK_dbo_Guest_dbo_Reservation_Reservation_ReservationId" FromRole="Guest" ToRole="Reservation" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="ReservationId" />
+          </Key>
+          <Property Name="ReservationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kod_Rezerwacji" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Data_utworzenia" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Cena" Type="Int32" Nullable="false" />
+          <Property Name="Data_zameldowania" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Data_wymeldowania" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Waluta" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Prowizja" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Guest" Relationship="Self.FK_dbo_Guest_dbo_Reservation_Reservation_ReservationId" FromRole="Reservation" ToRole="Guest" />
+        </EntityType>
+        <Association Name="FK_dbo_Guest_dbo_Reservation_Reservation_ReservationId">
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="0..1" />
+          <End Role="Guest" Type="Self.Guest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reservation">
+              <PropertyRef Name="ReservationId" />
+            </Principal>
+            <Dependent Role="Guest">
+              <PropertyRef Name="Reservation_ReservationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbReservationsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Guest" EntityType="Self.Guest" />
+          <EntitySet Name="Reservation" EntityType="Self.Reservation" />
+          <AssociationSet Name="FK_dbo_Guest_dbo_Reservation_Reservation_ReservationId" Association="Self.FK_dbo_Guest_dbo_Reservation_Reservation_ReservationId">
+            <End Role="Reservation" EntitySet="Reservation" />
+            <End Role="Guest" EntitySet="Guest" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DbReservationsModelStoreContainer" CdmEntityContainer="DbReservationsEntities">
+          <EntitySetMapping Name="Guest">
+            <EntityTypeMapping TypeName="DbReservationsModel.Guest">
+              <MappingFragment StoreEntitySet="Guest">
+                <ScalarProperty Name="GuestId" ColumnName="GuestId" />
+                <ScalarProperty Name="Imie" ColumnName="Imie" />
+                <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Data_urodzenia" ColumnName="Data urodzenia" />
+                <ScalarProperty Name="Adres_pocztowy" ColumnName="Adres pocztowy" />
+                <ScalarProperty Name="Reservation_ReservationId" ColumnName="Reservation_ReservationId" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="Miasto" ColumnName="Miasto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservation">
+            <EntityTypeMapping TypeName="DbReservationsModel.Reservation">
+              <MappingFragment StoreEntitySet="Reservation">
+                <ScalarProperty Name="ReservationId" ColumnName="ReservationId" />
+                <ScalarProperty Name="Kod_Rezerwacji" ColumnName="Kod Rezerwacji" />
+                <ScalarProperty Name="Data_utworzenia" ColumnName="Data utworzenia" />
+                <ScalarProperty Name="Cena" ColumnName="Cena" />
+                <ScalarProperty Name="Data_zameldowania" ColumnName="Data zameldowania" />
+                <ScalarProperty Name="Data_wymeldowania" ColumnName="Data wymeldowania" />
+                <ScalarProperty Name="Waluta" ColumnName="Waluta" />
+                <ScalarProperty Name="Prowizja" ColumnName="Prowizja" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
