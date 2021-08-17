@@ -13,7 +13,7 @@ export class AddGuest extends Component {
 
     handleSumbit(event) {
         event.preventDefault();
-        fetch(process.env.REACT_APP_API + 'Guests/CreateReservation', {
+        fetch(process.env.REACT_APP_API + 'Guests', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -58,7 +58,7 @@ export class AddGuest extends Component {
                         <Row>
                             <Col>
                                 <Form onSubmit={this.handleSumbit}>
-                                    <Form.Group className="mb-3" controlId="GuestId">
+                                    <Form.Group className="mb-3" controlId="Imie">
                                         <Form.Label>IMIE</Form.Label>
                                         <Form.Control required type="text" name="Imie" placeholder="Imie"/>
                                     </Form.Group>

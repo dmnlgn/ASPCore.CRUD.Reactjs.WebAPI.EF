@@ -31,15 +31,15 @@ namespace WebReservationService
                routeTemplate: "api/{controller}/{action}/{DropReservations}"
            );
 
-            config.Routes.MapHttpRoute(
-               name: "CreateReservation",
-               routeTemplate: "api/{controller}/{action}/{CreateReservation}"
-           );
+           // config.Routes.MapHttpRoute(
+           //    name: "CreateReservation",
+           //    routeTemplate: "api/{controller}/{action}/{CreateReservation}"
+           //);
 
-            config.Routes.MapHttpRoute(
-               name: "CreateGuest",
-               routeTemplate: "api/{controller}/{action}/{CreateGuest}"
-           );
+           // config.Routes.MapHttpRoute(
+           //    name: "CreateGuest",
+           //    routeTemplate: "api/{controller}/{action}/{CreateGuest}"
+           //);
 
             config.Formatters.JsonFormatter
                 .SupportedMediaTypes

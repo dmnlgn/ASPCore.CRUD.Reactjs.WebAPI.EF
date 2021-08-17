@@ -127,6 +127,10 @@ namespace WebReservationService.Controllers
         [Route("api/Reservations/DropReservations/")]
         public IHttpActionResult DropReservations()
         {
+            var guest = db.Guest
+               .Where(s => (s.Reservation_ReservationId != null));
+            db.Guest.RemoveRange(guest);
+
             var reservation = db.Reservation
                 .ToList();
 
@@ -140,24 +144,25 @@ namespace WebReservationService.Controllers
 
             return Ok(reservation);
         }
-        //create a new reservation
-        [Route("api/Reservations/CreateReservation")]
-        [HttpPost]
-        public object CreateReservation(Reservation reservation)
-        {
-            try
-            {
-                Reservation sm = new Reservation();
+        ////create a new reservation
+        //[Route("api/Reservations/CreateReservation")]
+        //[ActionName("CreateReservation")]
+        //[HttpPost]
+        //public IHttpActionResult CreateReservation(Reservation reservation)
+        //{
+        //    try
+        //    {
+        //        Reservation sm = new Reservation();
 
-                db.Reservation.Add(sm);
-                db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                Console.Write(ex.Message);
-            }
-            return Ok(reservation);
+        //        db.Reservation.Add(sm);
+        //        db.SaveChanges();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.Write(ex.Message);
+        //    }
+        //    return Ok(reservation);
 
-        }
+        //}
     }
 }

@@ -1,5 +1,4 @@
 /* eslint-disable react/require-render-return */
-import { Tab } from 'bootstrap';
 import React, {Component} from 'react';
 import { Table } from 'react-bootstrap';
 
@@ -11,15 +10,7 @@ export class Guests extends Component {
     }
 
     refreshList() {
-        fetch(process.env.REACT_APP_API + 'Guests',{
-            method: 'GET',
-            mode: 'cors',
-            headers: {
-                'Accept': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json',
-            },
-        })
+        fetch(process.env.REACT_APP_API + 'Guests')
         .then(response => response.json())
         .then(data => {
             this.setState({deps: data})

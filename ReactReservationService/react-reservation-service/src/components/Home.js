@@ -18,7 +18,7 @@ export class Home extends Component {
         let addReservationClose = () => this.setState({AddReservationShow:false});
         let addGuestClose = () => this.setState({AddGuestShow:false})
         return (
-        <div className="mt-5 d-flex justify-content-center">
+        <div className="mt-4 d-flex justify-content-center">
         <ButtonToolbar>
             <ButtonGroup className="button-gap">
                 <DropAllReservations/>
